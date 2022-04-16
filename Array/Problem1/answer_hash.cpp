@@ -12,7 +12,6 @@ void findPair(int nums[], int n, int target)
     for (int i = 0; i < n; i++)
     {
         // check if pair (nums[i], target - nums[i]) exists
- 
         // if the difference is seen before, print the pair
         if (map.find(target - nums[i]) != map.end())
         {
