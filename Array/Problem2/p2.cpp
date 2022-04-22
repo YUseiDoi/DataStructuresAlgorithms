@@ -46,7 +46,7 @@ void findSubarrays(int nums[], int numsSize){
         sumSubarray += nums[i];
         if(map.find(sumSubarray) != map.end()){     // check if the number exists in the map. if it doesn't exist, return map.end()
             auto it = map.find(sumSubarray);
-            while(it->first == sumSubarray && it != map.end()){
+            while(it != map.end() && it->first == sumSubarray){     // the order is important. should know how && works
                 cout << "Subarray [" << it->second + 1 << "..." << i << "]\n";
                 it++;
             }
