@@ -22,7 +22,11 @@ Note that the problem deals with subarrays that are contiguous, i.e., whose elem
 
 */
 
+
+// my answer: map
+
 #include <stdio.h>
+#include <unordered_map>
 #include <iostream>
 using namespace std;
 
@@ -35,18 +39,18 @@ int main(){
 }
 
 void findSubarrays(int nums[], int numsSize){
-    int i, j, k, sumSubarray;
-    int numsResult[] = {};
-    for(size_t i = 0; i < numsSize; i++){
-        for(size_t j = 0; j < numsSize - i; j++){
-            sumSubarray = 0;
-            for(size_t k = j; k < j + i + 1; k++){
-                sumSubarray += nums[k];
-                numsResult[k] = nums[k];
-            }
-            if(sumSubarray == 0){
-                cout << "Find the Pair";
+    unordered_map<int, int> map;
+    int sumSubarray = 0;
+    map.insert(pair<int, int>(0, -1));
+    for(int i = 0; i < numsSize; i++){
+        sumSubarray += nums[i];
+        if(map.find(sumSubarray) != map.end()){     // check if the number exists in the map. if it doesn't exist, return map.end()
+            auto it = map.find(sumSubarray);
+            while(it->first == sumSubarray && it != map.end()){
+                cout << "Subarray [" << it->second + 1 << "..." << i << "]\n";
+                it++;
             }
         }
+        map.insert(pair<int, int>(sumSubarray, i));
     }
 }
